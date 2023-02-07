@@ -1,0 +1,28 @@
+.subtotal{
+    display:flex;
+    flex-direction: column;
+    width: max-content;
+    justify-content: space-between;
+    width:300px;
+    height:100px;
+    margin-left:15px;
+    background-color: rgb(241, 241, 241);
+    padding:20px;
+}
+.checkout__button{
+    padding: 3px;
+    background-color: rgb(255, 192, 74);
+    margin-bottom: 2px;
+    width: 100%;
+    border: 1px solid rgb(255, 192, 74);
+    
+}
+.subtotal__gift{
+   margin-top: 10px;
+   margin-bottom: 5px;
+}
+.checkout__button:hover{
+    border: 1px solid rgb(250, 204, 118);
+    background-color: rgb(250, 204, 118);
+
+}

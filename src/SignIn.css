@@ -1,0 +1,47 @@
+body{
+    background-color: white;
+}
+.signin{
+    max-width: 500px;
+    max-height: 500px;
+    margin: auto;
+    text-align: center;
+    margin-top: 33px;
+   
+    background-color: rgb(244, 244, 244);
+}
+
+.AmazonLogoSignIn{
+    object-fit: contain;
+    max-width: 200px;
+    max-height: 200px;
+    margin: 30px;
+}
+.formInputs{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+}
+.signInInputs{
+   width: 300px;
+    max-height: 200px;
+    padding: 10px;
+    margin: 3px;
+
+}
+button{
+    width: 100px;
+    padding: 5px;
+    margin: 15px;
+    background-color: rgb(255, 205, 112);
+    border: 1px solid  rgb(255, 205, 112);
+
+}
+.create__account{
+    padding:30px;    
+}
+.signuplink{
+    text-decoration: none;
+
+}
