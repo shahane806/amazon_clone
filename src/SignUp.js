@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './SignUp.css'
 import { Link } from "react-router-dom";
+import {auth} from './Firebase'
 
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 function SignUp() {
+  const [email,setemail] = useState('');
+  const [password,setpassword]=useState('');
+
+    const register = e => {
+    createUserWithEmailAndPassword(auth,email, password)
+    .then((auth) => {
+      // Signed in 
+   
+      console.log(auth)
+      // ...
+    })
+    .catch((error) => {
+    
+      alert(error.message)
+    });
+    }
+
   return (
     <div className='signup'>
     <div className='signupblock'>
@@ -15,22 +34,19 @@ function SignUp() {
         <form>
         <div className='inputs'>
 
-        <input 
-        className='signUpInputs'
-        autoComplete='username'
-        placeholder="Username" type="text"/>
+     
         </div>
         <div className='inputs'>
-            <input  autoComplete="abc123@gmail.com" className='signUpInputs' type="email" placeholder='abc123@gmail.com'/>
+            <input  name="email" autoComplete="abc123@gmail.com" className='signUpInputs' type="email" onChange={(e)=>setemail(e.target.value)} placeholder='abc123@gmail.com'/>
         </div>
         <div className='inputs'>
 
         <input 
         className='signUpInputs'
         autoComplete='password'
-        placeholder="Password" type="password"/>
+        placeholder="Password" onChange={(e)=>setpassword(e.target.value)} type="password"/>
         </div>
-        <button type='submit'>
+        <button type='submit' onClick={register}>
             Sign Up
         </button>
         </form>

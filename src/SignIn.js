@@ -1,15 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import './SignIn.css'
-import { Link } from "react-router-dom";
+import {auth} from './Firebase';
+import {signInWithEmailAndPassword } from "firebase/auth";
 function SignIn() {
-  const[username,setusername]=useState(true);
-  const[password,setpassword]=useState(true);
-  console.log(username,password)
+  const[email,setemail] = useState('');
+  const[password,setpassword] = useState('');
+ 
+  const signIn = e => {
+  signInWithEmailAndPassword(auth,email, password)
+  .then((auth) => {
+    // Signed in 
+ 
+    console.log(auth.user)
+    // ...
+  })
+  .catch((error) => {
+  
+    alert(error.message)
+  });
+  }
+
+  
+
   return (
     <div className='signin'>
         <div className='signinblock'>
             <Link to="/">
-            <img className="AmazonLogoSignIn" src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png'>
+            <img className="AmazonLogoSignIn" alt = "" src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png'>
             </img>
            
             </Link>
@@ -19,8 +37,8 @@ function SignIn() {
 
             <input 
             className='signInInputs'
-            onChange={(e)=>setusername(e.target.value)}
-            placeholder="Username" type="text" autoComplete='username'/>
+            onChange={(e)=>setemail(e.target.value)}
+            placeholder="abc@gmail.com" type="email" autoComplete='email'/>
             </div>
             <div className='inputs'>
 
@@ -29,7 +47,7 @@ function SignIn() {
             onChange={(e)=>setpassword(e.target.value)}
             placeholder="Password" type="password" autoComplete='current-password'/>
             </div>
-            <button type='submit'>
+            <button type='submit' onClick={signIn}>
                 Login
             </button>
             </form>
