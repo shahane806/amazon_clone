@@ -3,7 +3,7 @@ import './SignUp.css'
 import { useNavigate } from "react-router-dom";
 
 import { Link, redirect } from "react-router-dom";
-import {auth} from './Firebase'
+import {auth} from './firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 function SignUp() {
   const navigate = useNavigate();
