@@ -4,8 +4,15 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 function Header() {
-  const[{basket},dispatch] = useStateValue();
-  console.log(basket)
+  const[{basket},dispatch] = useStateValue('');
+  const[{user},userDispatch] = useStateValue('');
+console.log(user)
+  const logout = (e) =>{
+      userDispatch({
+        type:"LOGOUT",
+        user: '',
+      })
+  }
   return (
     <div id="header">
       <Link to="/">
@@ -21,12 +28,23 @@ function Header() {
       </div>
       <SearchIcon className="header__searchIcon" />
       <div className="header__nav">
-        <Link to="/signIn">
+         {
+          !user?  <Link to="/signIn">
+          <div className="header__option">
+            <span className="header_optionLineOne">Hello {user? user[0].email: "User"}</span>
+           
+               <span className="header_optionLineTwo">Sign In</span>
+            
+          </div>
+          </Link> :  
         <div className="header__option">
-          <span className="header_optionLineOne">Hello User</span>
-          <span className="header_optionLineTwo">Sign In</span>
+          <span className="header_optionLineOne">Hello {user? user[0].email: "User"}</span>
+         
+             <span className="logout header_optionLineTwo" onClick={logout}>Log Out</span>
+          
         </div>
-        </Link>
+       
+         }
         
         <div className="header__option">
           <span className="header_optionLineOne">Returns</span>

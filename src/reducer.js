@@ -1,5 +1,6 @@
 export const initialState = {
   basket: [],
+  user:'',
 };
 
 export const getSubtotal = (basket) =>
@@ -40,6 +41,22 @@ export const reducer = (state, action) => {
           ...state,
           basket:newBasket,
         }
+     case "ADDUSER":{
+        return {
+          ...state,
+          user:[
+            ...state.user,action.user
+          ]
+        }
+     };
+     case "LOGOUT":{
+      return {
+        ...state,
+        user : '',
+      }
+     };
+     
+
     default:
       return state;
   }

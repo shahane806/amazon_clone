@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import './SignUp.css'
-import { Link } from "react-router-dom";
-import {auth} from './Firebase'
+import { useNavigate } from "react-router-dom";
 
-import {createUserWithEmailAndPassword} from 'firebase/auth';
+import { Link, redirect } from "react-router-dom";
+import {auth} from './Firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 function SignUp() {
+  const navigate = useNavigate();
   const [email,setemail] = useState('');
   const [password,setpassword]=useState('');
-
-    const register = e => {
-    createUserWithEmailAndPassword(auth,email, password)
-    .then((auth) => {
-      // Signed in 
-   
-      console.log(auth)
-      // ...
-    })
-    .catch((error) => {
-    
-      alert(error.message)
-    });
+    const register = (e) => {
+      e.preventDefault();
+      createUserWithEmailAndPassword(auth,email, password)
+      .then((userCredential) => {
+        // Signed in 
+         navigate("/index");
+        // ...
+      })
+      .catch((error) => {
+      
+      alert(error.message);
+      });
     }
 
   return (
+
     <div className='signup'>
     <div className='signupblock'>
         <Link to="/">
@@ -31,7 +33,7 @@ function SignUp() {
        
         </Link>
          <div className='formInputs'>
-        <form>
+        <form onSubmit={register}>
         <div className='inputs'>
 
      

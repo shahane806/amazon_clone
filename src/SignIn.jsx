@@ -1,30 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignIn.css'
 import {auth} from './Firebase';
-import {signInWithEmailAndPassword } from "firebase/auth";
+import {useStateValue} from './StateProvider';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 function SignIn() {
+  const[{user},dispatch] = useStateValue();
   const[email,setemail] = useState('');
   const[password,setpassword] = useState('');
- 
-  const signIn = e => {
+  const navigate = useNavigate();
+  const signIn = (e) => {
+    e.preventDefault();
   signInWithEmailAndPassword(auth,email, password)
-  .then((auth) => {
+  .then((userCredential) => {
     // Signed in 
- 
-    console.log(auth.user)
+    
+    navigate("/index");
+    dispatch({
+      type:"ADDUSER",
+      user:userCredential.user,
+    });
     // ...
   })
   .catch((error) => {
   
-    alert(error.message)
+    alert(error.message);
   });
   }
 
   
 
-  return (
-    <div className='signin'>
+      return (
+        
+        <div className='signin'>
         <div className='signinblock'>
             <Link to="/">
             <img className="AmazonLogoSignIn" alt = "" src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png'>
@@ -32,7 +40,7 @@ function SignIn() {
            
             </Link>
              <div className='formInputs'>
-            <form>
+            <form onSubmit={signIn}>
             <div className='inputs'>
 
             <input 
@@ -64,6 +72,7 @@ function SignIn() {
         </div>
 
     </div>
+
   )
 }
 
