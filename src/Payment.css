@@ -1,0 +1,23 @@
+.TotalItems{
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    border-bottom: 1px solid lightblue;
+}
+.PaymentAddress{
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    border-bottom: 1px solid lightblue;
+}
+.ProductReviews{
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid lightblue;
+}
+.PaymentReviewsTitle,.PaymentAddressTitle{
+    flex: 0.3;
+}
+.PaymentAddressDisc,.PaymentReviewsProducts{
+    flex: 0.7;
+}

@@ -5,7 +5,7 @@ import Checkout from "./Checkout";
 import SignUp from "./SignUp";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import SignIn from "./SignIn";
-
+import Payment from "./Payment";
 function App() {
   return (
     <div className="app">
@@ -26,6 +26,15 @@ function App() {
               <>
                 <Header />
                 <Checkout />
+              </>
+            }
+          />
+          <Route
+            path="payment"
+            element={
+              <>
+                <Header />
+                <Payment/>
               </>
             }
           />
