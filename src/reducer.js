@@ -48,13 +48,13 @@ export const reducer = (state, action) => {
             ...state.user,action.user
           ]
         }
-     };
+     }
      case "LOGOUT":{
       return {
         ...state,
         user : '',
       }
-     };
+     }
      
 
     default:

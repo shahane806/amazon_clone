@@ -10,14 +10,20 @@
     display: flex;
     border-bottom: 1px solid lightblue;
 }
-.ProductReviews{
+.ProductReviews,.StripePayment{
     display: flex;
     padding: 20px;
     border-bottom: 1px solid lightblue;
 }
-.PaymentReviewsTitle,.PaymentAddressTitle{
+.PaymentReviewsTitle,.PaymentAddressTitle,.CardTitle{
     flex: 0.3;
 }
 .PaymentAddressDisc,.PaymentReviewsProducts{
     flex: 0.7;
+}
+.CardElement{
+    flex:0.3;
+    background-color: rgba(184, 182, 182, 0.125);
+    padding: 20px;
+
 }

@@ -6,7 +6,12 @@ import SignUp from "./SignUp";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import SignIn from "./SignIn";
 import Payment from "./Payment";
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_51MhATBSDpu6MsaKXK8RVo8sWkPNIefeLTMKaLN62ZbDRsEyNic9fEKEDQ4k11jlSVxw5Z7h0WYbl6rrU4kky2rT700bCBWmzeW');
+
 function App() {
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -34,7 +39,9 @@ function App() {
             element={
               <>
                 <Header />
-                <Payment/>
+                  <Elements stripe={stripePromise}>
+                 <Payment />
+                 </Elements>
               </>
             }
           />
