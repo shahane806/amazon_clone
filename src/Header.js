@@ -8,6 +8,7 @@ function Header() {
   const[{user},userDispatch] = useStateValue('');
 console.log(user)
   const logout = (e) =>{
+    localStorage.clear();
       userDispatch({
         type:"LOGOUT",
         user: '',
@@ -29,27 +30,28 @@ console.log(user)
       <SearchIcon className="header__searchIcon" />
       <div className="header__nav">
          {
-          !user?  <Link to="/signIn">
+          !user&&!localStorage.getItem("Profile")?  <Link to="/signIn">
           <div className="header__option">
             <span className="header_optionLineOne">Hello {user? user[0].email: "User"}</span>
            
-               <span className="header_optionLineTwo">Sign In</span>
+               <span className="header_optionLineTwo">{"SignIn"}</span>
             
           </div>
           </Link> :  
         <div className="header__option">
-          <span className="header_optionLineOne">Hello {user? user[0].email: "User"}</span>
+          <span className="header_optionLineOne">Hello {user? user[0].email: localStorage.getItem("Profile")}</span>
          
              <span className="logout header_optionLineTwo" onClick={logout}>Log Out</span>
           
         </div>
        
          }
-        
-        <div className="header__option">
+       <Link to={"/Orders"}> 
+        <div className="header__option" >
           <span className="header_optionLineOne">Returns</span>
           <span className="header_optionLineTwo">&Orders</span>
         </div>
+        </Link>
         <div className="header__option">
           <span className="header_optionLineOne">Your</span>
           <span className="header_optionLineTwo">Prime</span>

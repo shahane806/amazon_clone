@@ -5,15 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { Link, redirect } from "react-router-dom";
 import {auth} from './firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useStateValue } from './StateProvider';
 function SignUp() {
   const navigate = useNavigate();
   const [email,setemail] = useState('');
   const [password,setpassword]=useState('');
+
     const register = (e) => {
       e.preventDefault();
       createUserWithEmailAndPassword(auth,email, password)
       .then((userCredential) => {
         // Signed in 
+       
          navigate("/index");
         // ...
       })
@@ -41,6 +44,7 @@ function SignUp() {
         <div className='inputs'>
             <input  name="email" autoComplete="abc123@gmail.com" className='signUpInputs' type="email" onChange={(e)=>setemail(e.target.value)} placeholder='abc123@gmail.com'/>
         </div>
+      
         <div className='inputs'>
 
         <input 

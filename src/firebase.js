@@ -24,6 +24,7 @@ let db2 = getFirestore(firebaseApp);
 db1 = getStorage();
 db2 = getFirestore();
 
+
 const auth = getAuth(firebaseApp);
-export { db2 , auth  } ;
+export { db1,db2 , auth  } ;
    

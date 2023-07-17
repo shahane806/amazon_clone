@@ -15,12 +15,15 @@ function SignIn() {
   .then((userCredential) => {
     // Signed in 
     
-    navigate("/index");
     dispatch({
       type:"ADDUSER",
       user:userCredential.user,
     });
     // ...
+    localStorage.setItem("Profile",userCredential.user.email
+    )
+    
+    navigate("/index");
   })
   .catch((error) => {
   

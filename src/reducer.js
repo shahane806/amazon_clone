@@ -1,5 +1,6 @@
 export const initialState = {
   basket: [],
+  recentOrder:[],
   user:'',
 };
 
@@ -16,6 +17,20 @@ export const reducer = (state, action) => {
         basket: [
           ...state.basket,
           {
+            id: action.id,
+            title: action.title,
+            image: action.image,
+            price: action.price,
+            rating: action.rating,
+          },
+        ],
+      };
+    case "ADDRECENTORDER":
+      return {
+        ...state,
+        recentOrder: [
+          ...state.recentOrder,
+         {
             id: action.id,
             title: action.title,
             image: action.image,
