@@ -22,7 +22,6 @@ function SignIn() {
     // ...
     localStorage.setItem("Profile",userCredential.user.email
     )
-    
     navigate("/index");
   })
   .catch((error) => {

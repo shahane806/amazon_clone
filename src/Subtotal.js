@@ -16,7 +16,7 @@ function Subtotal({value}) {
               <input type="checkbox" />
               This order contains a gift
             </small>
-            <Link class="payment" to="/payment"> <button className="checkout__button">
+            <Link className="payment" to="/payment"> <button className="checkout__button">
                Checkout
             </button>
             </Link>

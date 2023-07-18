@@ -32,6 +32,7 @@ function Checkout() {
             basket.map(item=>{
                 
                 return <CheckoutProduct
+                key={item.id}
                 id={item.id}
                 title={item.title}
                 price={item.price}

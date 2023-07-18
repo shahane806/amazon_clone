@@ -1,6 +1,5 @@
 export const initialState = {
   basket: [],
-  recentOrder:[],
   user:'',
 };
 
@@ -25,20 +24,12 @@ export const reducer = (state, action) => {
           },
         ],
       };
-    case "ADDRECENTORDER":
+    case "EMPTYBASKET":
+      
       return {
         ...state,
-        recentOrder: [
-          ...state.recentOrder,
-         {
-            id: action.id,
-            title: action.title,
-            image: action.image,
-            price: action.price,
-            rating: action.rating,
-          },
-        ],
-      };
+        basket:action.basket,
+      }
     case "REMOVE":
         const index = state.basket.findIndex((item)=>
           item.id === action.id

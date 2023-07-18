@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react'
 import CheckoutProduct from './CheckoutProduct';
@@ -6,11 +5,10 @@ import './Payment.css';
 import { getSubtotal } from './reducer';
 import { useStateValue } from './StateProvider';
 import instance from './MyAxios';
-import { Mode } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { db1, db2 } from './firebase';
-import { collection } from 'firebase/firestore';
-import { doc, setDoc } from "firebase/firestore"; 
+import { db } from './firebase';
+import { getDatabase, push, ref, set } from "firebase/database";
+import moment from 'moment/moment';
 function Payment() {
     const stripe =  useStripe();
     const navigate = useNavigate();
@@ -19,7 +17,7 @@ function Payment() {
     const [disabled,setDisable] = useState(true);
     const [succeseed,setSucceseed] = useState(false);
     const [processing,setProcessing] = useState("");
-    const [{basket , user}, dispatch] = useStateValue();
+  const[{basket,user},dispatch]= useStateValue();
     const [myClientSecret,setClientScret] = useState("");
     useEffect(()=>{
             const getClientScret = async () =>{
@@ -35,33 +33,44 @@ function Payment() {
             }
             getClientScret();
            
-    },[basket])
-    
+        },[basket])
+           console.log(user[0]?.uid)
+        function writeUserData(id, title, price, image,rating) {
+            const db = getDatabase();
+            const email = user[0]?.accessToken;
+            const uid = user[0]?.uid;
+            
+            let date,month,year;
+            date = new Date().getDate();
+            month = new Date().getMonth() +1;
+            year = new Date().getFullYear();
+            let cal = date+"/"+month+"/"+year;
+            push(ref(db, 'users/'+uid), {
+              userId:email,
+              id: id,
+              title: title,
+              price: price,
+              image: image,
+              rating: rating,
+              date:cal,
+            });
+          }
     const handleSubmit = async (e)=>{
          e.preventDefault();
          setProcessing(true);
-         console.log("submit")
-         basket.forEach(element => {
-            dispatch({
-                type:"ADDRECENTORDER",
-                recentOrders:{
-                    id: element.id,
-                    title: element.title,
-                    image: element.image,
-                    price: element.price,
-                    rating: element.rating
-                },
-            })});
-
-         const payload = await stripe.confirmCardPayment(myClientSecret,{
+         
+         
+        
+       const payload = await stripe.confirmCardPayment(myClientSecret,{
             payment_method:{
                 card:elements.getElement(CardElement)
             }
         
          }).then(({paymentIntent}) =>{
-            setSucceseed(true);
+            setSucceseed(true)
             setError(null);
             setProcessing(false);
+           basket.map((item)=> writeUserData(item.id,item.title,item.price,item.image,item.rating))
             navigate("/Orders")
            
             });
