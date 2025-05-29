@@ -1,26 +1,20 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {getDatabase} from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB5L2w_UpUjxuwYBP1U8EEBYwxsA3w2QVI",
-  authDomain: "clone-c47cb.firebaseapp.com",
-  projectId: "clone-c47cb",
-  storageBucket: "clone-c47cb.appspot.com",
-  messagingSenderId: "758137298246",
-  appId: "1:758137298246:web:2d65e5cacbb702ab021947",
-  measurementId: "G-DKL7SF5QVB"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
-
 const firebaseApp = initializeApp(firebaseConfig);
-// Option 1: Access Firebase services via the defaultProject variable
-let db = getDatabase(firebaseApp);
 
-// Option 2: Access Firebase services using shorthand notation
-
-
+const db = getDatabase(firebaseApp);
 const auth = getAuth(firebaseApp);
-export { db , auth  } ;
-   
+
+export { db, auth };
